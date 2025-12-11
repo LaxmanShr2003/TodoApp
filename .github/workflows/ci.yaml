@@ -19,26 +19,27 @@ jobs:
           node-version: '22'
       
       - name: install dependencies
-        working-directory: ./backend
+        working-directory: backend
         run: npm ci
 
       - name: run tests
-        working-directory: ./backend
+        working-directory: backend
         run: npm run lint -- --max-warnings=0
       
       - name: install frontend dependencies
-        working-directory: ./TodoApp
+        working-directory: TodoApp
         run: npm ci
       
       - name: run frontend tests
-        working-directory: ./TodoApp
+        working-directory: TodoApp
         run: npm run lint -- --max-warnings=0
         continue-on-error: false
       
       - name: build backend image
-        working-directory: ./backend
+        working-directory: backend
         run: docker build -t backend-image ./backend
         
       - name: build frontend image
-        working-directory: ./frontend
-        run: docker build -t frontend-image ./frontend
+        working-directory: TodoApp
+        run: docker build -t frontend-image ./TodoApp
+        
