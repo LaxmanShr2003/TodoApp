@@ -1,0 +1,44 @@
+name: build-and-test
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request: 
+    branches: [main, dev]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+
+      - name: set up node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22'
+      
+      - name: install dependencies
+        working-directory: ./backend
+        run: npm ci
+
+      - name: run tests
+        working-directory: ./backend
+        run: npm run lint -- --max-warnings=0
+      
+      - name: install frontend dependencies
+        working-directory: ./frontend
+        run: npm ci
+      
+      - name: run frontend tests
+        working-directory: ./frontend
+        run: npm run lint -- --max-warnings=0
+        continue-on-error: false
+      
+      - name: build backend image
+        working-directory: ./backend
+        run: docker build -t backend-image ./backend
+        
+      - name: build frontend image
+        working-directory: ./frontend
+        run: docker build -t frontend-image ./frontend

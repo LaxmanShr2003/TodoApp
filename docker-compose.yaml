@@ -1,0 +1,23 @@
+
+services:
+  backend:
+    build: ./backend
+    container_name: backend-image
+    restart: always
+    ports:
+    - "5000:5000"
+    environment:
+    - ./backend/.env
+
+  frontend:
+    build: ./TodoApp
+    container_name: frontend-image
+    restart: always
+    ports:
+    - "3000:3000"
+    environment:
+    - ./frontend/.env
+    depends_on:
+      - backend
+      
+  
