@@ -27,11 +27,11 @@ jobs:
         run: npm run lint -- --max-warnings=0
       
       - name: install frontend dependencies
-        working-directory: ./frontend
+        working-directory: ./TodoApp
         run: npm ci
       
       - name: run frontend tests
-        working-directory: ./frontend
+        working-directory: ./TodoApp
         run: npm run lint -- --max-warnings=0
         continue-on-error: false
       
