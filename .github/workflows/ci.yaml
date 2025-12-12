@@ -37,9 +37,9 @@ jobs:
       
       - name: build backend image
         working-directory: ./backend
-        run: docker build -t backend-image ./backend
+        run: docker build -t backend-image ../backend
         
       - name: build frontend image
         working-directory: TodoApp
-        run: docker build -t frontend-image ./TodoApp
+        run: docker build -t frontend-image ../TodoApp
         
