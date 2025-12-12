@@ -16,7 +16,7 @@ services:
     ports:
     - "3000:3000"
     environment:
-    - ./frontend/.env
+    - ./TodoApp/.env
     depends_on:
       - backend
       
